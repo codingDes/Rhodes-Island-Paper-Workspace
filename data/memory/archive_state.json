@@ -1,0 +1,29 @@
+{
+  "categories": [
+    "未分类",
+    "因果推断",
+    "世界模型"
+  ],
+  "archives": [
+    {
+      "doc_id": "20260408_154249_6126",
+      "filename": "A Survey on Causal Inference.pdf",
+      "title": "A Survey on Causal Inference",
+      "categories": [
+        "未分类",
+        "因果推断"
+      ],
+      "text_length": 193733
+    },
+    {
+      "doc_id": "20260408_154234_1068",
+      "filename": "01_World_Models_2018.pdf",
+      "title": "World Models",
+      "categories": [
+        "未分类",
+        "世界模型"
+      ],
+      "text_length": 90922
+    }
+  ]
+}

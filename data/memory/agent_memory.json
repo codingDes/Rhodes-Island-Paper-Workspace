@@ -1,0 +1,4 @@
+{
+  "_deprecated": true,
+  "_note": "对话记录不再写入此文件；上下文仅使用请求中的 history（服务端已截断）。干员背景请维护于 data/lore/ 并通过 GET/PUT /api/lore 读写。"
+}

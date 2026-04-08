@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-multipart
+pymupdf
+openai
+faiss-cpu
+numpy
+
+# Step2+ (upload & parse & rag) will use:
+# requests

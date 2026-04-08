@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>罗德岛工作终端</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-brand">
+        <img class="topbar-logo" src="/assets/img/logos/logo.png" alt="" width="44" height="44" />
+        <h1>罗德岛工作终端</h1>
+        <img class="topbar-brand-mark" src="/assets/img/logos/logo_1.png" alt="" width="48" height="48" />
+      </div>
+      <div class="doctor-top">
+        <div id="sanity-widget" class="sanity-widget" title="理智：脑力问答消耗；休息、闲聊或与当前工作无关的对话可恢复，上限 180">
+          <div class="sanity-anim-anchor">
+            <img class="sanity-icon" src="/assets/img/icons/brain.png" alt="" width="28" height="28" />
+            <span class="sanity-fraction">
+              <span id="sanity-current">180</span>/<span id="sanity-max">180</span>
+            </span>
+          </div>
+        </div>
+        <img id="doctor-avatar" class="doctor-avatar" src="/assets/img/doctor.png" alt="doctor avatar" />
+        <div class="doctor-meta">
+          <div class="doctor-name">博士</div>
+          <div class="doctor-desc">账号：Doctor · 权限：ALL！！！</div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-layout" class="layout">
+      <aside class="panel left">
+        <div class="left-head">
+          <h2>干员通讯录</h2>
+          <button id="left-toggle-btn" class="mini-btn" title="收起/展开通讯录">◀</button>
+        </div>
+        <div id="operator-list" class="operator-list"></div>
+      </aside>
+
+      <section class="panel center">
+        <div class="chat-title-bar">
+          <span id="chat-operator-name" class="chat-active-operator">干员</span>
+          <span id="chat-typing-status" class="chat-typing-status" aria-live="polite"></span>
+        </div>
+        <div id="chat-log" class="chat-log"></div>
+        <div class="chat-box">
+          <textarea id="chat-input" placeholder="未选档案时可闲聊；选中右侧档案后，可结合论文提问。"></textarea>
+          <button id="chat-btn">发送</button>
+        </div>
+      </section>
+
+      <aside class="panel right">
+        <section class="right-section right-section--archive" aria-label="档案管理">
+          <h2>档案管理</h2>
+          <div class="archive-actions">
+            <button id="upload-btn" type="button">上传档案</button>
+            <button id="category-manage-btn" type="button" class="secondary-btn">分类管理</button>
+          </div>
+          <div class="right-archive-block">
+            <div class="archive-list-head">
+              <h3>档案列表（可多选）</h3>
+              <select id="archive-filter-select"></select>
+            </div>
+            <div id="archive-list" class="archive-list"></div>
+          </div>
+        </section>
+
+        <section class="right-section" aria-label="资产列表">
+          <h2>资产列表</h2>
+          <div class="right-inset-card">
+            <ul class="asset-list">
+              <li class="asset-row">
+                <img class="asset-icon" src="/assets/img/icons/originite_prime.png" alt="" width="28" height="28" />
+                <span class="asset-label">至纯源石</span>
+                <span class="asset-value" data-asset="originium">21</span>
+              </li>
+              <li class="asset-row">
+                <img class="asset-icon" src="/assets/img/icons/orundum.png" alt="" width="28" height="28" />
+                <span class="asset-label">合成玉</span>
+                <span class="asset-value" data-asset="orundum">114514</span>
+              </li>
+              <li class="asset-row">
+                <img class="asset-icon" src="/assets/img/icons/lungmen_coin.png" alt="" width="28" height="28" />
+                <span class="asset-label">龙门币</span>
+                <span class="asset-value" data-asset="lungmen">5,201,314</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="right-section right-section--planner" aria-label="行动规划">
+          <h2>行动规划</h2>
+          <div class="right-inset-card right-inset-card--scroll">
+            <div class="planner-activity">
+              <div class="planner-subtitle">当前活动</div>
+              <div class="planner-activity-frame planner-carousel" aria-roledescription="carousel">
+                <div class="planner-carousel-viewport">
+                  <div class="planner-carousel-track" id="planner-activity-track">
+                    <div class="planner-carousel-slide">
+                      <img src="/assets/img/activity_1.png" alt="活动 1" />
+                    </div>
+                    <div class="planner-carousel-slide">
+                      <img src="/assets/img/activity_2.png" alt="活动 2" />
+                    </div>
+                    <div class="planner-carousel-slide">
+                      <img src="/assets/img/activity_3.png" alt="活动 3" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="planner-mainline">
+              <div class="planner-subtitle">主线进度</div>
+              <p class="planner-mainline-text" id="planner-mainline-text">
+                主线第 16 章「反常光谱」全部完成。
+              </p>
+            </div>
+            <div class="planner-battle">
+              <div class="planner-subtitle">最近作战</div>
+              <p class="planner-battle-stage" id="planner-battle-stage">1-7 暴君</p>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <div id="modal-upload-backdrop" class="modal-backdrop" aria-hidden="true">
+      <div class="modal-dialog" role="dialog" aria-labelledby="modal-upload-title">
+        <h3 id="modal-upload-title">上传档案</h3>
+        <p class="modal-hint">选择文件后，点选下方分类标签（可多选）；不选则归入「未分类」。</p>
+        <label class="modal-label">文件</label>
+        <input type="file" id="modal-file-input" accept=".pdf,.txt,.md" class="modal-file" />
+        <label class="modal-label">分类</label>
+        <div id="modal-upload-categories" class="modal-upload-category-grid" role="group" aria-label="选择分类"></div>
+        <div class="modal-actions">
+          <button type="button" id="modal-upload-cancel" class="secondary-btn">取消</button>
+          <button type="button" id="modal-upload-submit" class="modal-upload-submit">上传</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-categories-backdrop" class="modal-backdrop" aria-hidden="true">
+      <div class="modal-dialog modal-dialog--wide" role="dialog" aria-labelledby="modal-categories-title">
+        <h3 id="modal-categories-title">分类管理</h3>
+        <p class="modal-hint">「未分类」为系统分类，不可删除或改名。删除分类后，相关档案会移出该标签（若无标签则归入未分类）。</p>
+        <div id="modal-category-rows" class="modal-category-rows"></div>
+        <div class="modal-new-cat-row">
+          <input type="text" id="modal-category-new-input" placeholder="新分类名称" />
+          <button type="button" id="modal-category-add-btn">添加分类</button>
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="modal-categories-close" class="secondary-btn">关闭</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/ui.js"></script>
+  </body>
+</html>
+
